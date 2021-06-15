@@ -1,12 +1,64 @@
 {
-  "name": "server",
+  "name": "ts-boilerplate",
+	"description": "My personal typescript boilerplate for general use",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+	"private": true,
+	"author": {
+		"name": "Matheus Henrique",
+		"email": "matheushenriqueplus99@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/matheus2x/typescript-boilerplate.git"
+	},
+	"license": "MIT",
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://www.mit.edu/~amini/LICENSE.md"
+		}
+	],
+	"homepage": "https://github.com/matheus2x/typescript-boilerplate#readme",
+  "bugs": {
+    "url": "https://github.com/matheus2x/typescript-boilerplate#issues"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "lint": "eslint src --max-warnings=0",
+    "prepare": "husky install",
+    "test": "jest --maxWorkers=50%",
+    "test:watch": "npm test -- --watch",
+    "test:unit": "npm test -- -c jest-unit-config.js",
+    "test:integration": "npm test -- -c jest-integration-config.js",
+    "test:ci": "jest --runInBand --coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+			"pre-push": "npm run test:ci"
+    }
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "npm run lint --fix",
+      "npm run test --findRelatedTests --bail"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.2",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
+    "jest": "^27.0.4",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.1",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.2"
+  }
 }
